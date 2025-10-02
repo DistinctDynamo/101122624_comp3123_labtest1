@@ -11,10 +11,8 @@ function checkDir(path){
         fs.mkdir(Paths.log,{recursive: true},(error)=>{
             if (error){
                 console.log(error);
-                return false;
             } else {
                 console.log("New Directory created successfully !!");
-                return true;
             }
         })
     } else{
@@ -23,22 +21,24 @@ function checkDir(path){
 }
 
 function createFiles(path){
-    filenum = 0
     if(fs.existsSync(Paths.log)==true){
+        filenum = 0
         for(i=0;i<10;i++){
-            fs.appendFile(`./logs/file${filenum}.txt`,`logs${filenum}.txt`,(error)=>{
+            fs.appendFile(`./logs/file${i}.txt`,`logs${i}.txt`,(error)=>{
                 if(error){
                     console.log(error)
                 } else{
-                    console.log("Files already created")
                 }
             })
+            console.log(`file${filenum}.txt created`)
             filenum++
         }
+    } else{
+        console.log("Directory does not exist")
     }
 }
 
 
-
 checkDir(Paths.log)
+
 createFiles(Paths.log)
